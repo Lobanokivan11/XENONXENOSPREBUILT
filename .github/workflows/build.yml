@@ -26,7 +26,7 @@ jobs:
     steps:
     - name: Prepare (Linux)
       if: runner.os == 'Linux'
-      run: bash clone.sh
+      run: sh clone.sh
 
     - name: Prepare (Windows)
       if: runner.os == 'Windows'
@@ -40,7 +40,7 @@ jobs:
 
     - name: Build (Linux)
       if: runner.os == 'Linux'
-      run: bash build-linux.sh
+      run: sh build-linux.sh
 
     - name: UPLOAD ARTIFACTS
       uses: actions/upload-artifact@v4
