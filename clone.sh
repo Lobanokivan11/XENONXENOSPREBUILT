@@ -1,3 +1,4 @@
+sudo apt update
 sudo apt install git git-lfs
 git lfs install
 git clone https://github.com/hedge-dev/XenonRecomp.git
