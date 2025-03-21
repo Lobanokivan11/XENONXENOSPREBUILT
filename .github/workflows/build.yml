@@ -20,7 +20,7 @@ jobs:
           - os: windows-latest
             c_compiler: clang-cl
             cpp_compiler: clang-cl
-          - os: ubuntu-latest
+          - os: ubuntu-24.10
             c_compiler: clang
             cpp_compiler: clang++
     steps:
@@ -58,7 +58,7 @@ jobs:
           prebuilt-linux.zip
 
   release:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.10
     permissions:
       contents: write
     needs: [build]
