@@ -23,7 +23,7 @@ jobs:
           - os: ubuntu-latest
             c_compiler: clang
             cpp_compiler: clang++
-
+    steps:
     - name: Prepare (Linux)
       if: runner.os == 'Linux'
       run: bash clone.sh
