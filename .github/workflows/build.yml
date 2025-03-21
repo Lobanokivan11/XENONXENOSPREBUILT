@@ -24,7 +24,6 @@ jobs:
             c_compiler: clang
             cpp_compiler: clang++
     steps:
-
     - name: Checkout
       uses: actions/checkout@v4
       with:
@@ -48,13 +47,18 @@ jobs:
     - name: Build (Linux)
       if: runner.os == 'Linux'
       run: bash build-linux.sh
-
-    - name: UPLOAD ARTIFACTS
-      uses: softprops/action-gh-release@v1
-      with:
-        body: XenonRecomp And XenosRecomp Binaries
-        tag_name: github_run
-        name: Action Release
-        files: |
-           prebuilt-windows.zip
-           prebuilt-linux.zip
+  release:
+     runs-on: ubuntu-24.04
+     permissions:
+       contents: write
+     needs: [build]
+     steps:
+     - name: UPLOAD ARTIFACTS
+       uses: softprops/action-gh-release@v1
+       with:
+         body: XenonRecomp And XenosRecomp Binaries
+         tag_name: github_run
+         name: Action Release
+         files: |
+            prebuilt-windows.zip
+            prebuilt-linux.zip
