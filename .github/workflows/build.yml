@@ -1,0 +1,71 @@
+name: build
+
+on:
+  schedule:
+    - cron: "0 * * * *"
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        build_type: [Release]
+        include:
+          - os: windows-latest
+            c_compiler: clang-cl
+            cpp_compiler: clang-cl
+          - os: ubuntu-latest
+            c_compiler: clang
+            cpp_compiler: clang++
+
+      - name: Prepare (Linux)
+        if: runner.os == 'Linux'
+        run: bash clone.sh
+
+      - name: Prepare (Windows)
+        if: runner.os == 'Windows'
+        run: .\clone.bat
+        shell: cmd
+
+      - name: Build (Windows)
+        if: runner.os == 'Windows'
+        run: .\build-win.bat
+        shell: cmd
+
+      - name: Build (Linux)
+        if: runner.os == 'Linux'
+        run: bash build-linux.sh
+
+      - name: UPLOAD ARTIFACTS
+        uses: actions/upload-artifact@v4
+        with:
+          name: artifacts
+          path: |
+            prebuilt-windows.zip
+            prebuilt-linux.zip
+
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    needs: [build]
+    steps:
+
+    - uses: actions/download-artifact@v4
+      with: 
+        name: artifacts
+        path: artifacts
+
+    - uses: ncipollo/release-action@v1
+      with:
+        artifacts: "*.zip"
+        name:  Continuous build
+        allowUpdates: true
+        tag: latest_build
+        makeLatest: true
