@@ -24,6 +24,13 @@ jobs:
             c_compiler: clang
             cpp_compiler: clang++
     steps:
+
+    - name: Checkout
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+        submodules: true
+
     - name: Prepare (Linux)
       if: runner.os == 'Linux'
       run: ./clone.sh
