@@ -78,14 +78,14 @@ jobs:
          name: artifacts-linux
          path: artifacts
      - name: UPLOAD ARTIFACTS
-       uses: softprops/action-gh-release@v1
+       uses: svenstaro/upload-release-action@v2
        with:
-         body: XenonRecomp And XenosRecomp Binaries
-         tag_name: github_run
-         name: Action Release
-         files: |
-            prebuilt-windows.zip
-            prebuilt-linux.zip
+         repo_token: ${{ secrets.GITHUB_TOKEN }}
+         file: ./artifacts/*
+         tag: github_run
+         overwrite: true
+         body: "XenonRecomp And XenosRecomp Binaries"
+         file_glob: true
      - name: Actions Ntfy
        run: |
          curl \
