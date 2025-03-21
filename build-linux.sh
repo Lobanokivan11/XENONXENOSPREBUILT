@@ -1,4 +1,4 @@
-wget -qO- https://apt.llvm.org/llvm-snapshot.gpg.key | sudo tee /etc/apt/trusted.gpg.d/apt.llvm.org.asc
+bash -c "$(wget -O - https://apt.llvm.org/llvm.sh)"
 sudo apt update
 sudo apt-get install ninja-build cmake
 mkdir prebuilt-linux
