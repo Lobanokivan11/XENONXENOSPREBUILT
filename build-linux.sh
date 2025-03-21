@@ -1,4 +1,4 @@
-wget -qO - https://apt.llvm.org/llvm.sh | sudo bash -s all
+wget -qO - https://apt.llvm.org/llvm.sh | sudo bash -s 21 all
 sudo apt update
 sudo apt-get install ninja-build cmake
 mkdir prebuilt-linux
