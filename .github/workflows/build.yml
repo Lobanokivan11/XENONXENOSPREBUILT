@@ -30,12 +30,12 @@ jobs:
 
     - name: Prepare (Windows)
       if: runner.os == 'Windows'
-      run: .\clone.bat
+      run: clone.bat
       shell: cmd
 
     - name: Build (Windows)
       if: runner.os == 'Windows'
-      run: .\build-win.bat
+      run: build-win.bat
       shell: cmd
 
     - name: Build (Linux)
