@@ -1,4 +1,5 @@
-sudo apt install clang pkgconfig ninja
+sudo apt update
+sudo apt install clang ninja-build
 mkdir prebuilt-linux
 cd XenonRecomp
 cmake -DCMAKE_CXX_COMPILER=clang-cl -DCMAKE_C_COMPILER=clang-cl -DCMAKE_BUILD_TYPE=Release -G Ninja -S . -B build
